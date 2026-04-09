@@ -1,0 +1,27 @@
+{
+  "name": "-akademisyen--renci-randevu-ve-leti-im-sistemi-main",
+  "version": "1.0.0",
+  "description": "Akademisyen-öğrenci iletişimini dijitalleştiren bu platformda, öğrencilerin uzun randevu talepleri yapay zeka ile 1-2 cümlelik net özetlere dönüştürülerek iletilir. Amacımız; e-posta karmaşasına ve kapı önü beklemelerine son verip onay süreçlerini çok daha verimli kılmaktır",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "prisma": "^6.19.3"
+  }
+}
