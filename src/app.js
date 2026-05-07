@@ -7,15 +7,12 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public')); // Statik dosyaları sun
+app.use(express.static('public'));
 
-// Routes
 app.use('/api/auth', authRoutes);
 
-// Base Route
 app.get('/', (req, res) => {
     res.json({
         message: 'FÜSİS - Akademisyen-Öğrenci Randevu Sistemi API Başlatıldı.',
