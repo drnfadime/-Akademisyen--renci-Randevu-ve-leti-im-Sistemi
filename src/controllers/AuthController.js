@@ -4,8 +4,7 @@ class AuthController {
     register = async (req, res) => {
         try {
             const user = await authService.register(req.body);
-            
-            // Hassas bilgileri temizle
+
             const { password, ...userWithoutPassword } = user;
 
             return res.status(201).json({
@@ -26,7 +25,6 @@ class AuthController {
             const { email, password } = req.body;
             const { user, token } = await authService.login(email, password);
 
-            // Hassas bilgileri temizle
             const { password: _, ...userWithoutPassword } = user;
 
             return res.status(200).json({
