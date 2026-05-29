@@ -42,4 +42,12 @@ public class AppointmentService {
         appointment.setStatus(status);
         return appointmentRepository.save(appointment);
     }
+
+    // Akademisyenin randevularını duruma göre filtrele
+    public List<Appointment> getAppointmentsByStatus(Long academicianId, String status) {
+        if (status == null || status.isEmpty()) {
+            return appointmentRepository.findByAcademicianId(academicianId);
+        }
+        return appointmentRepository.findByAcademicianIdAndStatus(academicianId, status);
+    }
 }

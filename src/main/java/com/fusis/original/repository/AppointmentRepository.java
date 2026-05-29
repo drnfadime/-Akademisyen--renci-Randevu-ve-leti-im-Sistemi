@@ -8,4 +8,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     List<Appointment> findByAcademicianId(Long academicianId);
     List<Appointment> findByStudentId(Long studentId);
+    List<Appointment> findByAcademicianIdAndStatus(Long academicianId, String status);
 }

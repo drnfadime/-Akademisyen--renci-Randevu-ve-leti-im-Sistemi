@@ -6,7 +6,7 @@ import com.fusis.original.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;g
+import jakarta.validation.Valid;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -48,5 +48,13 @@ public class AppointmentController {
     public ResponseEntity<Appointment> updateStatus(@PathVariable Long id,
                                                     @RequestParam String status) {
         return ResponseEntity.ok(appointmentService.updateStatus(id, status));
+    }
+
+    // Akademisyen paneli - duruma göre filtreli liste
+    @GetMapping("/academician/{id}/filter")
+    public ResponseEntity<List<Appointment>> getByStatus(
+            @PathVariable Long id,
+            @RequestParam(required = false) String status) {
+        return ResponseEntity.ok(appointmentService.getAppointmentsByStatus(id, status));
     }
 }
