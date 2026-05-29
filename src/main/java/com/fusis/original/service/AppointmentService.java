@@ -3,9 +3,9 @@ package com.fusis.original.service;
 import com.fusis.original.entity.Appointment;
 import com.fusis.original.entity.User;
 import com.fusis.original.repository.AppointmentRepository;
+import com.fusis.original.dto.AppointmentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.fusis.original.dto.AppointmentDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
 public class AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
+    private final SummarizationService summarizationService;
 
     // Öğrenci randevu talebi oluşturur
     public Appointment createAppointment(String topic, String description,
@@ -22,7 +23,8 @@ public class AppointmentService {
                                          User student, User academician) {
         Appointment appointment = new Appointment();
         appointment.setTopic(topic);
-        appointment.setDescription(description);
+        String summary = summarizationService.summarize(description);
+        appointment.setDescription(summary);
         appointment.setStatus("PENDING");
         appointment.setRequestedAt(LocalDateTime.now());
         appointment.setAppointmentDate(appointmentDate);
