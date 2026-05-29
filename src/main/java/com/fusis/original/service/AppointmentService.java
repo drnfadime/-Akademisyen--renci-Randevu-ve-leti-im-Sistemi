@@ -5,6 +5,7 @@ import com.fusis.original.entity.User;
 import com.fusis.original.repository.AppointmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.fusis.original.dto.AppointmentDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -58,5 +59,21 @@ public class AppointmentService {
             return appointmentRepository.findByAcademicianIdAndAppointmentDateBefore(userId, now);
         }
         return appointmentRepository.findByStudentIdAndAppointmentDateBefore(userId, now);
+    }
+
+    // Appointment entity'sini DTO'ya dönüştür
+    public AppointmentDTO toDTO(Appointment appointment) {
+        AppointmentDTO dto = new AppointmentDTO();
+        dto.setId(appointment.getId());
+        dto.setTopic(appointment.getTopic());
+        dto.setDescription(appointment.getDescription());
+        dto.setStatus(appointment.getStatus());
+        dto.setRequestedAt(appointment.getRequestedAt());
+        dto.setAppointmentDate(appointment.getAppointmentDate());
+        dto.setStudentId(appointment.getStudent().getId());
+        dto.setStudentName(appointment.getStudent().getName());
+        dto.setAcademicianId(appointment.getAcademician().getId());
+        dto.setAcademicianName(appointment.getAcademician().getName());
+        return dto;
     }
 }
