@@ -6,6 +6,7 @@ import com.fusis.original.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;g
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +20,7 @@ public class AppointmentController {
 
     // Randevu talebi oluştur
     @PostMapping
-    public ResponseEntity<Appointment> create(@RequestBody AppointmentRequest request) {
+    public ResponseEntity<Appointment> create(@Valid @RequestBody AppointmentRequest request) {
         User student = new User();
         student.setId(request.getStudentId());
 
