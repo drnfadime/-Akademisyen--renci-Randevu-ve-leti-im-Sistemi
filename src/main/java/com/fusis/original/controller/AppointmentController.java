@@ -57,4 +57,12 @@ public class AppointmentController {
             @RequestParam(required = false) String status) {
         return ResponseEntity.ok(appointmentService.getAppointmentsByStatus(id, status));
     }
+
+    // Geçmiş randevuları getir
+    @GetMapping("/past/{userId}")
+    public ResponseEntity<List<Appointment>> getPastAppointments(
+            @PathVariable Long userId,
+            @RequestParam String role) {
+        return ResponseEntity.ok(appointmentService.getPastAppointments(userId, role));
+    }
 }

@@ -50,4 +50,13 @@ public class AppointmentService {
         }
         return appointmentRepository.findByAcademicianIdAndStatus(academicianId, status);
     }
+
+    // Geçmiş randevuları getirir
+    public List<Appointment> getPastAppointments(Long userId, String role) {
+        LocalDateTime now = LocalDateTime.now();
+        if ("ACADEMICIAN".equals(role)) {
+            return appointmentRepository.findByAcademicianIdAndAppointmentDateBefore(userId, now);
+        }
+        return appointmentRepository.findByStudentIdAndAppointmentDateBefore(userId, now);
+    }
 }
