@@ -1,0 +1,31 @@
+package com.fusis.original.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "\"Appointment\"")
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Appointment {
+
+    @Id
+    private Integer Appointmentid;
+
+    private LocalDateTime date;
+    private Boolean isonline;
+    private Boolean old;
+    private String subject;
+
+    // Her randevunun bir öğrencisi (User) vardır
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private User student;
+
+    // Her randevunun bir öğretmeni (Teacher) vardır
+    @ManyToOne
+    @JoinColumn(name = "teacherId")
+    private Teacher teacher;
+}
