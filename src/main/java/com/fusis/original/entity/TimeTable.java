@@ -11,6 +11,7 @@ import lombok.*;
 public class TimeTable {
 
     @Id
+    @Column(name = "\"timeTableid\"")
     private Integer timeTableid;
 
     private String day;

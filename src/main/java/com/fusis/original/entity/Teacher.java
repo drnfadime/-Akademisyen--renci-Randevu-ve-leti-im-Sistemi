@@ -17,6 +17,7 @@ public class Teacher {
 
     @Id
     // Prisma'da Teacherid dediğin için burada da ismini koruyoruz
+    @Column(name = "\"Teacherid\"")
     private Integer Teacherid; 
     
     private String name;

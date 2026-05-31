@@ -2,6 +2,7 @@ package com.fusis.original.entity;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -19,6 +20,7 @@ import lombok.Setter;
 @Setter
 public class User {
     @Id
+    @Column(name = "id")
     private Integer id;
     private String name;
     private String email;   
