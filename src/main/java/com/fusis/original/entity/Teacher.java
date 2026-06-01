@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 public class Teacher {
 
     @Id
-    // Prisma'da Teacherid dediğin için burada da ismini koruyoruz
+    // Prisma'da Teacherid dediğin için burada da ismini koruyoruz (eskidendi çalışmadığı için jpaya uyarladım)
     @Column(name = "\"Teacherid\"")
     private Integer Teacherid; 
     

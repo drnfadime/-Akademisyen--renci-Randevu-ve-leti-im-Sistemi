@@ -21,13 +21,11 @@ public class Appointment {
     private Boolean old;
     private String subject;
 
-    // Her randevunun bir öğrencisi (User) vardır
     @ManyToOne
-    @JoinColumn(name = "studentId")
+    @JoinColumn(name = "\"studentId\"")
     private User student;
 
-    // Her randevunun bir öğretmeni (Teacher) vardır
     @ManyToOne
-    @JoinColumn(name = "teacherId")
+    @JoinColumn(name = "\"teacherId\"")
     private Teacher teacher;
 }

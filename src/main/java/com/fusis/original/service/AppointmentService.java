@@ -1,5 +1,18 @@
 package com.fusis.original.service;
 
-public class AppointmentService {
+import com.fusis.original.dto.request.AppointmentRequestDTO;
+import com.fusis.original.dto.response.AppointmentResponseDTO;
+import java.util.List;
 
+
+
+public interface AppointmentService {
+
+    AppointmentResponseDTO createAppointment(AppointmentRequestDTO request);
+
+
+
+
+    List<AppointmentResponseDTO> getAppointmentsByStudent(Integer studentId);
+    List<AppointmentResponseDTO> getAppointmentsByTeacher(Integer teacherId);
 }
