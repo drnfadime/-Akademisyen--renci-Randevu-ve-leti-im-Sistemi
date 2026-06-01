@@ -32,7 +32,6 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Öğretmen bulunamadı"));
 
         Appointment appointment = new Appointment();
-        appointment.setAppointmentid(request.getId());
         appointment.setDate(request.getDate());
         appointment.setIsonline(request.getIsonline());
         appointment.setOld(false);
