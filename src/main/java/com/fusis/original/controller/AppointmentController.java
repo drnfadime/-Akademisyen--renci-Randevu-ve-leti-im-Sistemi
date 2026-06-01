@@ -33,4 +33,28 @@ public class AppointmentController {
             @PathVariable Integer teacherId) {
         return ResponseEntity.ok(appointmentService.getAppointmentsByTeacher(teacherId));
     }
+
+
+
+
+    // Akademisyenin bekleyen randevuları
+@GetMapping("/teacher/{teacherId}/pending")
+public ResponseEntity<List<AppointmentResponseDTO>> getPendingByTeacher(
+        @PathVariable Integer teacherId) {
+    return ResponseEntity.ok(appointmentService.getPendingByTeacher(teacherId));
+}
+
+// Randevuyu onayla
+@PutMapping("/{appointmentId}/approve")
+public ResponseEntity<AppointmentResponseDTO> approveAppointment(
+        @PathVariable Integer appointmentId) {
+    return ResponseEntity.ok(appointmentService.approveAppointment(appointmentId));
+}
+
+// Randevuyu reddet
+@PutMapping("/{appointmentId}/reject")
+public ResponseEntity<AppointmentResponseDTO> rejectAppointment(
+        @PathVariable Integer appointmentId) {
+    return ResponseEntity.ok(appointmentService.rejectAppointment(appointmentId));
+}
 }
