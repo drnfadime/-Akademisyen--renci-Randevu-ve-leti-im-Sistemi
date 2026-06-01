@@ -32,6 +32,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Öğretmen bulunamadı"));
 
         Appointment appointment = new Appointment();
+        appointment.setAppointmentid(request.getId());
         appointment.setDate(request.getDate());
         appointment.setIsonline(request.getIsonline());
         appointment.setOld(false);
@@ -70,4 +71,33 @@ public class AppointmentServiceImpl implements AppointmentService {
         dto.setTeacherName(appointment.getTeacher().getName() + " " + appointment.getTeacher().getSurname());
         return dto;
     }
+
+
+//hocanın randevu listelemesini görme kodları
+
+
+
+    @Override
+public List<AppointmentResponseDTO> getPendingByTeacher(Integer teacherId) {
+    return appointmentRepository.findByTeacher_TeacheridAndOldFalse(teacherId)
+            .stream()
+            .map(this::toResponseDTO)
+            .collect(Collectors.toList());
+}
+
+@Override
+public AppointmentResponseDTO approveAppointment(Integer appointmentId) {
+    Appointment appointment = appointmentRepository.findById(appointmentId)
+            .orElseThrow(() -> new RuntimeException("Randevu bulunamadı"));
+    appointment.setOld(false);
+    return toResponseDTO(appointmentRepository.save(appointment));
+}
+
+@Override
+public AppointmentResponseDTO rejectAppointment(Integer appointmentId) {
+    Appointment appointment = appointmentRepository.findById(appointmentId)
+            .orElseThrow(() -> new RuntimeException("Randevu bulunamadı"));
+    appointment.setOld(true);
+    return toResponseDTO(appointmentRepository.save(appointment));
+}
 }

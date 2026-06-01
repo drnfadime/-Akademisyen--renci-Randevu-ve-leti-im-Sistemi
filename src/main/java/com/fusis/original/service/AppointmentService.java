@@ -15,4 +15,12 @@ public interface AppointmentService {
 
     List<AppointmentResponseDTO> getAppointmentsByStudent(Integer studentId);
     List<AppointmentResponseDTO> getAppointmentsByTeacher(Integer teacherId);
+
+
+
+    //bekleyenler için randevu listeleme
+
+    List<AppointmentResponseDTO> getPendingByTeacher(Integer teacherId);
+    AppointmentResponseDTO approveAppointment(Integer appointmentId);
+    AppointmentResponseDTO rejectAppointment(Integer appointmentId);
 }
