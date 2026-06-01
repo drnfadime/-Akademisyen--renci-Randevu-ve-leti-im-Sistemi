@@ -15,8 +15,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Teacher {
 
-    @Id
     // Prisma'da Teacherid dediğin için burada da ismini koruyoruz (eskidendi çalışmadığı için jpaya uyarladım)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "\"Teacherid\"")
     private Integer teacherid; 
     
