@@ -11,14 +11,14 @@ import lombok.*;
 public class TimeTable {
 
     @Id
+    @Column(name = "\"timeTableid\"")
     private Integer timeTableid;
 
     private String day;
     private String startTime;
     private String endTime;
-
-    // Bu çalışma saati hangi öğretmene ait?
+// bu çalışma saati hangi hıcaya ait
     @ManyToOne
-    @JoinColumn(name = "teacherId")
+    @JoinColumn(name = "\"teacherId\"")
     private Teacher teacher;
 }
