@@ -1,11 +1,11 @@
 package com.fusis.original.dto.request;
 
 import java.time.LocalDateTime;
-
 import lombok.Data;
 
 @Data
 public class AppointmentRequestDTO {
+    private Integer id;
     private LocalDateTime date;
     private Integer studentId;
     private Integer teacherId;

@@ -32,6 +32,7 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Öğretmen bulunamadı"));
 
         Appointment appointment = new Appointment();
+        appointment.setAppointmentid(request.getId());
         appointment.setDate(request.getDate());
         appointment.setIsonline(request.getIsonline());
         appointment.setOld(false);
@@ -98,5 +99,21 @@ public AppointmentResponseDTO rejectAppointment(Integer appointmentId) {
             .orElseThrow(() -> new RuntimeException("Randevu bulunamadı"));
     appointment.setOld(true);
     return toResponseDTO(appointmentRepository.save(appointment));
+}
+
+@Override
+public List<AppointmentResponseDTO> getOldAppointmentsByStudent(Integer studentId) {
+    return appointmentRepository.findByStudent_IdAndOldTrue(studentId)
+            .stream()
+            .map(this::toResponseDTO)
+            .collect(Collectors.toList());
+}
+
+@Override
+public List<AppointmentResponseDTO> getOldAppointmentsByTeacher(Integer teacherId) {
+    return appointmentRepository.findByTeacher_TeacheridAndOldTrue(teacherId)
+            .stream()
+            .map(this::toResponseDTO)
+            .collect(Collectors.toList());
 }
 }

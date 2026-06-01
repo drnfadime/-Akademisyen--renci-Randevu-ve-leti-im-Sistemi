@@ -57,4 +57,18 @@ public ResponseEntity<AppointmentResponseDTO> rejectAppointment(
         @PathVariable Integer appointmentId) {
     return ResponseEntity.ok(appointmentService.rejectAppointment(appointmentId));
 }
+
+// Öğrencinin geçmiş randevuları
+@GetMapping("/student/{studentId}/history")
+public ResponseEntity<List<AppointmentResponseDTO>> getOldByStudent(
+        @PathVariable Integer studentId) {
+    return ResponseEntity.ok(appointmentService.getOldAppointmentsByStudent(studentId));
+}
+
+// Öğretmenin geçmiş randevuları
+@GetMapping("/teacher/{teacherId}/history")
+public ResponseEntity<List<AppointmentResponseDTO>> getOldByTeacher(
+        @PathVariable Integer teacherId) {
+    return ResponseEntity.ok(appointmentService.getOldAppointmentsByTeacher(teacherId));
+}
 }

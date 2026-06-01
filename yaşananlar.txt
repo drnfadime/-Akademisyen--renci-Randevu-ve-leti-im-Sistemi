@@ -1,0 +1,2 @@
+prisma spring boot ile çalışmıyormuş jpaya geçildi
+jpaya göre baştan kodlandı 
