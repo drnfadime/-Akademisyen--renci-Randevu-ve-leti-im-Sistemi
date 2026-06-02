@@ -9,7 +9,7 @@ public class AppointmentResponseDTO {
     private Integer id;
     private LocalDateTime date;
     private Boolean isonline;
-    private AppointmentStatus status;  // old yerine status
+    private AppointmentStatus status;
     private String subject;
     private String studentName;
     private String teacherName;

@@ -5,7 +5,6 @@ import lombok.Data;
 
 @Data
 public class AppointmentRequestDTO {
-    private Integer id;
     private LocalDateTime date;
     private Integer studentId;
     private Integer teacherId;
