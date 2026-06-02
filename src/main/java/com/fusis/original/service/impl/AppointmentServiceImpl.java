@@ -13,6 +13,7 @@ import com.fusis.original.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.fusis.original.exception.ResourceNotFoundException;
+import com.fusis.original.service.GoogleCalendarService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final UserRepository userRepository;
     private final TeacherRepository teacherRepository;
+    private final GoogleCalendarService googleCalendarService;
 
     @Override
     public AppointmentResponseDTO createAppointment(AppointmentRequestDTO request) {
@@ -71,6 +73,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     // Randevuyu onayla → APPROVED
+    /*
     @Override
     public AppointmentResponseDTO approveAppointment(Integer appointmentId) {
         Appointment appointment = appointmentRepository.findById(appointmentId)
@@ -78,6 +81,33 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointment.setStatus(AppointmentStatus.APPROVED);
         return toResponseDTO(appointmentRepository.save(appointment));
     }
+ */
+    @Override
+public AppointmentResponseDTO approveAppointment(Integer appointmentId) {
+    Appointment appointment = appointmentRepository.findById(appointmentId)
+        .orElseThrow(() -> new ResourceNotFoundException("Randevu bulunamadı"));
+
+    appointment.setStatus(AppointmentStatus.APPROVED);
+
+    // Meet linki oluştur (accessToken geçici olarak boş, FUS-10 sonrası JWT'den alınacak)
+    try {
+        String meetLink = googleCalendarService.createMeetEvent(
+            System.getenv("GOOGLE_ACCESS_TOKEN"), // FUS-10'da JWT'den gelecek
+            "Randevu: " + appointment.getSubject(),
+            appointment.getStudent().getEmail(),
+            appointment.getTeacher().getEmail(),
+            appointment.getDate()
+        );
+        appointment.setMeetLink(meetLink);
+    } catch (Exception e) {
+        // Meet oluşturulamazsa randevu yine de onaylanır
+        appointment.setMeetLink(null);
+    }
+
+    return toResponseDTO(appointmentRepository.save(appointment));
+}
+
+
 
     // Randevuyu reddet → REJECTED
     @Override
@@ -115,6 +145,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         dto.setSubject(appointment.getSubject());
         dto.setStudentName(appointment.getStudent().getName() + " " + appointment.getStudent().getSurname());
         dto.setTeacherName(appointment.getTeacher().getName() + " " + appointment.getTeacher().getSurname());
+        dto.setMeetLink(appointment.getMeetLink());
         return dto;
     }
 }
