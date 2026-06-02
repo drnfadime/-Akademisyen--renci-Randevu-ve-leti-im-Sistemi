@@ -21,4 +21,7 @@ public interface AppointmentService {
     // Geçmiş randevular
     List<AppointmentResponseDTO> getOldAppointmentsByStudent(Integer studentId);
     List<AppointmentResponseDTO> getOldAppointmentsByTeacher(Integer teacherId);
+
+    //meet linki getirir
+    String getMeetLink(Integer appointmentId);
 }
