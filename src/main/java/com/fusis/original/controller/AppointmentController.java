@@ -71,4 +71,13 @@ public ResponseEntity<List<AppointmentResponseDTO>> getOldByTeacher(
         @PathVariable Integer teacherId) {
     return ResponseEntity.ok(appointmentService.getOldAppointmentsByTeacher(teacherId));
 }
+// Randevunun Meet linkini getir
+@GetMapping("/{appointmentId}/meet-link")
+public ResponseEntity<String> getMeetLink(
+        @PathVariable Integer appointmentId) {
+    return ResponseEntity.ok(appointmentService.getMeetLink(appointmentId));
+}
+
+
+
 }

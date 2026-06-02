@@ -148,4 +148,20 @@ public AppointmentResponseDTO approveAppointment(Integer appointmentId) {
         dto.setMeetLink(appointment.getMeetLink());
         return dto;
     }
+
+@Override
+public String getMeetLink(Integer appointmentId) {
+    Appointment appointment = appointmentRepository.findById(appointmentId)
+        .orElseThrow(() -> new ResourceNotFoundException("Randevu bulunamadı"));
+
+    if (appointment.getMeetLink() == null) {
+        throw new ResourceNotFoundException("Bu randevu için henüz Meet linki oluşturulmamış");
+    }
+
+    return appointment.getMeetLink();
+}
+
+
+
+
 }
