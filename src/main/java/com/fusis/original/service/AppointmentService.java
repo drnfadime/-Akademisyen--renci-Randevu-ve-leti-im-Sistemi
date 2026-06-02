@@ -4,31 +4,21 @@ import com.fusis.original.dto.request.AppointmentRequestDTO;
 import com.fusis.original.dto.response.AppointmentResponseDTO;
 import java.util.List;
 
-
-
 public interface AppointmentService {
 
     AppointmentResponseDTO createAppointment(AppointmentRequestDTO request);
 
-
-
-
     List<AppointmentResponseDTO> getAppointmentsByStudent(Integer studentId);
     List<AppointmentResponseDTO> getAppointmentsByTeacher(Integer teacherId);
 
-
-
-    //bekleyenler için randevu listeleme
-
+    // Bekleyen randevular
     List<AppointmentResponseDTO> getPendingByTeacher(Integer teacherId);
+
+    // Onay / Red
     AppointmentResponseDTO approveAppointment(Integer appointmentId);
     AppointmentResponseDTO rejectAppointment(Integer appointmentId);
 
-    //geçmiş randevular için listeleme
-
+    // Geçmiş randevular
     List<AppointmentResponseDTO> getOldAppointmentsByStudent(Integer studentId);
     List<AppointmentResponseDTO> getOldAppointmentsByTeacher(Integer teacherId);
-
-
-
 }

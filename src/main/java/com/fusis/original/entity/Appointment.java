@@ -17,8 +17,12 @@ public class Appointment {
 
     private LocalDateTime date;
     private Boolean isonline;
-    private Boolean old;
     private String subject;
+
+    // old field'ı kaldırıldı, yerine status geldi
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private AppointmentStatus status;
 
     @ManyToOne
     @JoinColumn(name = "\"studentId\"")
