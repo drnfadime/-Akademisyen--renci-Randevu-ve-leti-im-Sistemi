@@ -12,6 +12,7 @@ import com.fusis.original.repository.UserRepository;
 import com.fusis.original.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.fusis.original.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +28,10 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public AppointmentResponseDTO createAppointment(AppointmentRequestDTO request) {
         User student = userRepository.findById(request.getStudentId())
-                .orElseThrow(() -> new RuntimeException("Öğrenci bulunamadı"));
+                .orElseThrow(() -> new ResourceNotFoundException("Öğrenci bulunamadı"));
 
         Teacher teacher = teacherRepository.findById(request.getTeacherId())
-                .orElseThrow(() -> new RuntimeException("Öğretmen bulunamadı"));
+                .orElseThrow(() -> new ResourceNotFoundException("Öğretmen bulunamadı"));
 
         Appointment appointment = new Appointment();
         appointment.setDate(request.getDate());
@@ -73,7 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public AppointmentResponseDTO approveAppointment(Integer appointmentId) {
         Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new RuntimeException("Randevu bulunamadı"));
+                .orElseThrow(() -> new ResourceNotFoundException("Randevu bulunamadı"));
         appointment.setStatus(AppointmentStatus.APPROVED);
         return toResponseDTO(appointmentRepository.save(appointment));
     }
