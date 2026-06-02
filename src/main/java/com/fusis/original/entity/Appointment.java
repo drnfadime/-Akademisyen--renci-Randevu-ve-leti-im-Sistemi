@@ -31,4 +31,5 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "\"teacherId\"")
     private Teacher teacher;
+    private String meetLink;
 }

@@ -13,4 +13,5 @@ public class AppointmentResponseDTO {
     private String subject;
     private String studentName;
     private String teacherName;
+    private String meetLink;
 }
